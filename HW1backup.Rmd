@@ -1,0 +1,79 @@
+---
+title: "MIS6380.002. HW1ggplot2"
+author: "Group#7"
+date: "20 September 2017"
+output:
+  
+  html_document: default
+---
+## Plot 1: Histogram
+## Attribute used - Estimated Freshmen UG Enrollment 
+
+
+```{r}
+
+### Loading crucial packages 
+library(ggplot2)
+#install.packages("openxlsx")
+library(openxlsx)
+
+### reading the Data file IPEDS_data 
+mainfile <- read.xlsx("IPEDS_data.xlsx")
+
+
+############# Plot 1 : Histogram###########3
+## Attribute used - Estimated Freshmen UG Enrollment 
+
+ggplot(mainfile, aes(mainfile$`Estimated.freshman.undergraduate.enrollment,.total`,
+                     fill = mainfile$Profile)) + geom_histogram(bins = 30, binwidth = 200,color = 'black')
+
+
+```
+
+
+## Plot 2: Boxplot 
+## Attribute used: Degree of Urbanization v/s Total Applicants w.r.t Profile
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+########### Plot 2: Boxplot ##########
+## Attribute used: Degree of Urbanization v/s Total Applicants w.r.t Profile
+ggplot() + 
+  geom_boxplot(aes(x = mainfile$`Degree.of.urbanization.(Urban-centric.locale)`, 
+                   y = mainfile$Applicants.total, fill = mainfile$Profile))
+
+
+```
+
+
+
+## Plot 3: Density Plot
+## Attribute used: Doctor's degrese.-.research/scholarship.awarded 
+
+```{r}
+########### Plot 3: Density Plot(Grouped) ##########
+## Attribute used: Doctor's degrese.-.research/scholarship.awarded 
+
+ggplot() + geom_density(aes(x = mainfile$`Doctor's.degrese.-.research/scholarship.awarded`, group = mainfile$Profile, fill = mainfile$Profile), adjust = 2, color = 'white')
+
+
+```
+
+## Plot 4: Bar Chart ##
+## Attribute used: Carnegie.Classification.2010:.Basic w.r.t Profile 
+
+
+
+
+```{r}
+
+########### Plot 4: Bar Chart ##########
+## Attribute used: Carnegie.Classification.2010:.Basic w.r.t Profile 
+
+ggplot() + geom_bar(aes(x = mainfile$Profile,
+                        fill = mainfile$`Carnegie.Classification.2010:.Basic`) ,
+        position = "dodge", alpha = 0.9)
+
+```
+
+
